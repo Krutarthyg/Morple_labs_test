@@ -8,17 +8,13 @@ app = Flask(__name__)
 
 @app.route('/htop')
 def htop():
-    # Get the system username
     username = os.getlogin()
 
-    # Get the server time in IST
     ist = pytz.timezone('Asia/Kolkata')
     server_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S %Z')
 
-    # Run the 'top' command and get its output
     top_output = subprocess.check_output(['top', '-b', '-n', '1']).decode('utf-8')
 
-    # HTML output
     return f"""
     <html>
     <head><title>HTop Page</title></head>
